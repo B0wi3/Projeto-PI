@@ -19,7 +19,7 @@
 - `CSS`
 - `Javascript`
 - `MSQL`
-- `Frework - Angular`
+- `Framework - Angular`
 ## 🖥 Preview:
 
 
