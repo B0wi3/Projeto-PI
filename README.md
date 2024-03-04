@@ -1,9 +1,9 @@
-# 🕹 Criação do Site REDDOT
-> Criando o Jogo Space Shooter JavaScript/CSS
+# 🕹 Criação do Projeto Integrador PI UNIVESP
+> Criação do Projeto Integrador PI UNIVESP - 
 
 
 ## 📋 Índice
-- [Link do projeto:](https://finandolopes.github.io/reddot/)
+- [Link do projeto:](https://finandolopes.github.io/Projeto-PI/)
 
 - [📖 Sobre](#-Sobre)
 - [🚀 Tecnologias utilizadas](#-Tecnologias-utilizadas)
@@ -11,12 +11,15 @@
 - [📌 Créditos](#-Créditos)
 
 ## 📖 Sobre
- - Criação do Site Reddot 
+ - Criação do Projeto Integrador PI UNIVESP
 
 ## 🚀 Tecnologias utilizadas
+- `PHP`
 - `HTML`
 - `CSS`
-
+- `Javascript`
+- `MSQL`
+- `Frework - Angular`
 ## 🖥 Preview:
 
 
