@@ -28,27 +28,14 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>CPF</th>
-                        <th>RG</th>
-                        <th>Endereço</th>
-                        <th>UF</th>
-                        <th>Cidade</th>
-                        <th>CEP</th>
-                        <th>Bairro</th>
+                        <th>CPF</th>                       
                         <th>Nascimento</th>
                         <th>Sexo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $row['nome']; ?></td>
-                        <td><?php echo $row['cpf']; ?></td>
-                        <td><?php echo $row['rg']; ?></td>
-                        <td><?php echo $row['endereco']; ?></td>
-                        <td><?php echo $row['uf']; ?></td>
-                        <td><?php echo $row['cidade']; ?></td>
-                        <td><?php echo $row['cep']; ?></td>
-                        <td><?php echo $row['bairro']; ?></td>
+                        <td><?php echo $row['nome']; ?></td>                        
                         <td><?php echo $row['nascimento']; ?></td>
                         <td><?php echo $row['sexo']; ?></td>
                     </tr>
@@ -71,23 +58,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 class="text-center text-light">Informações profissionais</h3>
-            <table class="table table-hover table-dark">
-                <thead>
-                    <tr>
-                        <th>Profissão</th>
-                        <th>Salário Bruto</th>
-                        <th>Salário Líquido</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><?php echo $row['profissao']; ?></td>
-                        <td>R$ <?php $bruto = $row['salario_brut_mensal']; echo $bruto; ?></td>
-                        <td>R$ <?php $liquido = $row['salario_liq_mensal']; echo $liquido; ?></td>
-                    </tr>
-                </tbody>
-            </table>
+            
             <a class="container text-light" href="pessoas.php">Voltar</a>
         </div>
     </body>
