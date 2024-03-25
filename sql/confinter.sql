@@ -70,9 +70,7 @@ CREATE TABLE IF NOT EXISTS requisicoes (
     data_nascimento DATE NOT NULL,
     telefone VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    horario_contato TIME NOT NULL,
-    cotacao ENUM('Sim', 'Não') NOT NULL,
-    contratacao ENUM('Sim', 'Não') NOT NULL,
+    horario_contato TIME NOT NULL,    
     tipo VARCHAR(250),
     categoria ENUM('Aposentado', 'Pensionista', 'Servidor Público', 'Outros') NOT NULL,
     outros_info VARCHAR(200)
