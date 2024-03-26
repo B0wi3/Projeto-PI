@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Preparar a declaração SQL para inserir os dados na tabela
-$sql = "INSERT INTO requisicoes (nome, data_nascimento, telefone, email, horario_contato, cotacao, contratacao, tipo, categoria, outros_info)
+$sql = "INSERT INTO requisicoes (nome, data_nascimento, telefone, email, horario_contato, tipo, categoria, outros_info)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 // Preparar e executar a declaração
@@ -26,9 +26,7 @@ if ($stmt = $conn->prepare($sql)) {
     $data_nascimento = $_POST['data_nascimento'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
-    $horario_contato = $_POST['horario_contato'];
-    $cotacao = isset($_POST['cotacao']) ? $_POST['cotacao'] : '';
-    $contratacao = isset($_POST['contratacao']) ? $_POST['contratacao'] : '';
+    $horario_contato = $_POST['horario_contato'];    
     $tipo = $_POST['tipo'];
     $categoria = isset($_POST['categoria']) ? implode(', ', $_POST['categoria']) : '';
     $outros_info = isset($_POST['outros_info']) ? $_POST['outros_info'] : '';
