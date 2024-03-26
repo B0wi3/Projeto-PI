@@ -19,7 +19,7 @@
 - `CSS`
 - `Javascript`
 - `MSQL`
-- `Framework - Angular, Bootstrap`
+- `Framework - Bootstrap`
 ## 🖥 Preview:
 
 
