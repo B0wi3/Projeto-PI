@@ -29,12 +29,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id_cliente` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(300) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
-  `celular` varchar(20) NOT NULL,    
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,    
   PRIMARY KEY (`id_cliente`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+-- Criação da tabela de requisições
+
+CREATE TABLE requisicoes (
+    id_requisicao INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    horario_contato TIME NOT NULL,
+    cotacao ENUM('Sim', 'Não') NOT NULL,
+    contratacao ENUM('Sim', 'Não') NOT NULL,
+    tipo VARCHAR(250),
+    categoria ENUM('Aposentado', 'Pensionista', 'Servidor Público', 'Outros') NOT NULL,
+    outros_info VARCHAR(200),
+    data_requisicao DATE NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+);
 
 -- --------------------------------------------------------
 
@@ -63,15 +77,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
--- Criação da tabela de requisições
-CREATE TABLE IF NOT EXISTS requisicoes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    data_nascimento DATE NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    horario_contato TIME NOT NULL,    
-    tipo VARCHAR(250),
-    categoria ENUM('Aposentado', 'Pensionista', 'Servidor Público', 'Outros') NOT NULL,
-    outros_info VARCHAR(200)
-);
+
