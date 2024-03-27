@@ -1,8 +1,6 @@
 <?php
     include_once('php/conexao.php');
-    $query = "SELECT * FROM empresa WHERE id_empresa = 1";
-    $res = mysqli_query($con, $query);
-    $row2 = mysqli_fetch_array($res);
+    
 ?>
 
 <!doctype html>

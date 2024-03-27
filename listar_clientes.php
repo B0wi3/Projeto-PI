@@ -1,10 +1,10 @@
 <?php
-    // Incluir o arquivo de conexão e as funções de manipulação de clientes
-    include_once('conexao.php');
-    include_once('funcoes_clientes.php');
+// Incluir o arquivo de conexão e as funções de manipulação de clientes
+include_once('php/conexao.php'); 
+include_once('php/funcoes_clientes.php');
 
-    // Consultar todos os clientes do banco de dados
-    $clientes = listarClientes($conexao);
+// Consultar todos os clientes do banco de dados
+$clientes = listarClientes($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +46,6 @@
         </tbody>
     </table>
 
-    <a href="painel_admin.php">Voltar para o Painel Administrativo</a>
+    <a href="admin.php">Voltar para o Painel Administrativo</a>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
     // Incluir o arquivo de conexão e as funções de manipulação de usuários
-    include_once('conexao.php');
-    include_once('funcoes_usuarios.php');
+    include_once('php/conexao.php'); 
+    include_once('php/funcoes_usuarios.php');      
 
     // Verificar se o formulário de criação de usuário foi enviado
     if(isset($_POST['criar_usuario'])) {
@@ -82,5 +82,7 @@
             }
         ?>
     </table>
+    !-- Botão Voltar -->
+    <a href="admin.php">Voltar</a>
 </body>
 </html>
