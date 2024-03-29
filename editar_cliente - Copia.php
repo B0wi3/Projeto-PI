@@ -49,65 +49,7 @@ if(isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <title>Editar Clientes</title>
-    <style>
-        body {
-            background-color: #343a40; /* Cor de fundo escura */
-            color: #fff; /* Cor do texto */
-            padding: 20px; /* Espaçamento interno */
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6; /* Cor da linha inferior */
-        }
-
-        th {
-            background-color: #343a40; /* Cor de fundo do cabeçalho */
-            color: #fff; /* Cor do texto do cabeçalho */
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #495057; /* Cor de fundo das linhas ímpares */
-        }
-
-        tbody tr:hover {
-            background-color: #6c757d; /* Cor de fundo ao passar o mouse */
-        }
-
-        .btn-action {
-            padding: 5px 10px; /* Espaçamento interno */
-            border: none; /* Remover borda */
-            cursor: pointer; /* Alterar cursor ao passar o mouse */
-            border-radius: 5px; /* Arredondar bordas */
-            margin-right: 5px; /* Margem à direita */
-        }
-
-        .btn-edit {
-            background-color: #007bff; /* Cor de fundo azul */
-            color: #fff; /* Cor do texto */
-        }
-
-        .btn-delete {
-            background-color: #dc3545; /* Cor de fundo vermelha */
-            color: #fff; /* Cor do texto */
-        }
-
-        .btn-back {
-            margin-top: 10px; /* Margem superior */
-        }
-
-        .btn-container {
-            text-align: center; /* Centralizar botões */
-        }
-    </style>
+    <title>Editar Cliente</title>
 </head>
 <body>
     <h1>Editar Cliente</h1>
@@ -132,6 +74,6 @@ if(isset($_GET['id'])) {
         </form>
     <?php endif; ?>
     
-    <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='admin.php'">Voltar</button>
+    <a href="listar_clientes.php">Voltar para a lista de clientes</a>
 </body>
 </html>

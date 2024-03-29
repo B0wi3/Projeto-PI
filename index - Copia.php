@@ -1,38 +1,12 @@
 <?php
-session_start();
-include_once('php/conexao.php');
-
-// Verifica se o formulário de login foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $sql = "SELECT * FROM usuarios WHERE usuario = ?";
-    $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    include_once('php/conexao.php');
     
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['senha'])) {
-            // Autenticação bem-sucedida, redireciona para o painel administrativo
-            $_SESSION['usuario'] = $username;
-            header("location: admin_painel.php");
-            exit();
-        } else {
-            $loginError = "Senha incorreta";
-        }
-    } else {
-        $loginError = "Usuário não encontrado";
-    }
-}
 ?>
 
 <!doctype html>
 <html lang="pt-br">
 <head>
- <title>CONFINTER</title>
+    <title>CONFINTER</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         // Remover a máscara de data antes de enviar o formulário
@@ -102,37 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('Por favor, selecione pelo menos uma categoria.');
                 event.preventDefault(); // Impede o envio do formulário
                 return;
-            }
-        });
-    });
-</script>
-<script>
-    // Função para exibir o campo "Outros" quando a opção é selecionada
-    document.addEventListener('DOMContentLoaded', function() {
-        var outrosCheckbox = document.getElementById('outros_check');
-        var outrosInfoDiv = document.getElementById('outros_info_div');
-
-        outrosCheckbox.addEventListener('change', function() {
-            if (outrosCheckbox.checked) {
-                outrosInfoDiv.style.display = 'block';
-            } else {
-                outrosInfoDiv.style.display = 'none';
-            }
-        });
-
-        // Verifica se pelo menos uma categoria foi selecionada antes de enviar o formulário
-        var form = document.getElementById('form-requisicao');
-        form.addEventListener('submit', function(event) {
-            var checkboxes = document.querySelectorAll('input[name="categoria[]"]');
-            var isChecked = false;
-            checkboxes.forEach(function(checkbox) {
-                if (checkbox.checked) {
-                    isChecked = true;
-                }
-            });
-            if (!isChecked) {
-                alert('Por favor, selecione pelo menos uma categoria.');
-                event.preventDefault(); // Impede o envio do formulário
             }
         });
     });
@@ -237,10 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div id="inicio" class="container">
-        <a class="navbar-brand h1 mb-0" href="#">
-            <img src="imgs/logo.png" alt="Logo CONFINTER" class="mr-2"> <!-- Adicione o elemento de imagem aqui -->
-            CONFINTER
-        </a>
+        <a class="navbar-brand h1 mb-0" href="#">CONFINTER</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -253,8 +195,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a class="nav-link" href="#servicos">Serviços</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="sobre.php">Sobre</a>
-                </li>                
+                    <a class="nav-link" href="#sobre">Sobre</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#depoimentos">Depoimentos</a>
                 </li>
@@ -274,36 +216,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </nav>
 
-
-<!-- Modal de Login -->
+    <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Painel Administrativo</h5>
+                <h5 class="modal-title" center id="loginModalLabel">Painel Administrativo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Formulário de Login -->
-                <form id="loginForm" method="post" action="admin.php">
+                <form id="loginForm" action="admin.php" method="post">
                     <div class="form-group">
                         <label for="username">Usuário</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+                        <div class="invalid-feedback">Por favor, insira seu nome de usuário.</div>
                     </div>
                     <div class="form-group">
                         <label for="password">Senha</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+                        <div class="invalid-feedback">Por favor, insira sua senha.</div>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-success btn-sm">Login</button>
                     </div>
                 </form>
                 <!-- Mensagem de erro -->
-                <?php if (isset($loginError)): ?>
-                    <div class="alert alert-danger"><?php echo $loginError; ?></div>
-                <?php endif; ?>
+                <div id="loginError" class="alert alert-danger d-none" role="alert">
+                    Usuário ou senha inválidos.
+                </div>
             </div>
         </div>
     </div>
@@ -342,58 +284,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div id="carouselSite" class="carousel slide" data-ride="carousel">
 
-    <ol class="carousel-indicators">
-        <?php
-        // Consulta ao banco de dados para obter as imagens do carrossel
-        $sql = "SELECT * FROM imagens_carrossel";
-        $result = $conexao->query($sql);
-
-        $indicator_index = 0; // Índice para os indicadores do carrossel
-
-        // Loop para criar os indicadores para cada imagem
-        while ($row = $result->fetch_assoc()) {
-            $active_class = $indicator_index === 0 ? 'active' : ''; // Adiciona a classe 'active' apenas para o primeiro indicador
-            echo "<li data-target='#carouselSite' data-slide-to='$indicator_index' class='$active_class'></li>";
-            $indicator_index++;
-        }
-        ?>
-    </ol>
+        <ol class="carousel-indicators">
+            <li data-target="#carouselSite" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselSite" data-slide-to="1"></li>
+            <li data-target="#carouselSite" data-slide-to="2"></li>
+        </ol>
 
 
-    <div class="carousel-inner">
-        <?php
-        // Reinicializa o índice do resultado
-        $result->data_seek(0);
-        $item_index = 0; // Índice para os itens do carrossel
+        <div class="carousel-inner">
 
-        // Loop para criar cada item do carrossel com suas respectivas imagens e conteúdos
-        while ($row = $result->fetch_assoc()) {
-            $active_class = $item_index === 0 ? 'active' : ''; // Adiciona a classe 'active' apenas para o primeiro item
-            $nome_arquivo = $row['nome_arquivo'];
-            echo "<div class='carousel-item $active_class'>
-                    <img src='imgs/$nome_arquivo' class='img-fluid d-block'>
-                    <div class='carousel-caption d-none d-md-block'>
-                        <!-- Adicione aqui os conteúdos para cada slide, se necessário -->
-                    </div>
-                  </div>";
-            $item_index++;
-        }
-        ?>
+            <div class="carousel-item active">
+                <img src="imgs/slide-01.jpg" class="img-fluid d-block">
+                <div class="carousel-caption d-none d-md-block">
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="imgs/slide-02.jpg" class="img-fluid d-block">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="disp-2">Nosso Foco</h1>
+                    <p class="lead disp-2">Seu parceiro ideal para realizar seus sonhos com crédito consignado, Somos especialistas em oferecer soluções financeiras personalizadas para servidores públicos, aposentados, pensionistas e trabalhadores CLT...</p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="imgs/slide-03.jpg" class="img-fluid d-block">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="disp-2">Com a CONFINTER, você pode:</h1>
+                    <p class="lead disp-2">
+                        Realizar aquele sonho de consumo que você tanto espera, como comprar um carro novo, viajar para o exterior ou reformar a sua casa. Obter crédito com segurança e tranquilidade, sem comprometer o seu orçamento.
+                        Contar com a assessoria de uma equipe especializada que te ajudará a escolher a melhor opção de crédito para você.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+
+
+        <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="sr-only">Avançar</span>
+        </a>
+
     </div>
 
-    <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="sr-only">Anterior</span>
-    </a>
 
-
-    <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="sr-only">Avançar</span>
-    </a>
-
-</div>   
-<div class="container">
+    <div class="container">
 
         <div class="row">
             <div class="col-11 col-md-12 text-center ml-md-0 ml-2 my-5">
@@ -563,172 +505,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
 
-
-        <div class="jumbotron jumbotron-fluid">
-
-            <div id="Missão, Visão e Valores" class="container">
-
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h1 class="display-4">
-                            <i class="fa fa-video-camera text-success col-12 col-md-1 esp" aria-hidden="true"></i>
-                            Missão, Visão e Valores
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="nav nav-pills justify-content-center mb-4" id="pills-nav" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href="#nav-item-01">
-                                    Missão
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-pills-02" data-toggle="pill" href="#nav-item-02">
-                                    Visão
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-pills-03" data-toggle="pill" href="#nav-item-03">
-                                    Valores
-                                </a>
-                            </li>
-
-                        </ul>
-
-                        <div class="tab-content" id="nav-pills-content">
-                            <div class="tab-pane fade show active" id="nav-item-01" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/site.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Facilitar o acesso a crédito consignado e fornecer consultoria financeira personalizada, 
-                                            visando o equilíbrio e bem-estar financeiro dos nossos clientes.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="nav-item-02" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/aplicativo.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Ser reconhecida como a empresa líder em crédito consignado e consultoria financeira, 
-                                            destacando-nos pela excelência no atendimento ao cliente e pela construção de relacionamentos 
-                                            sólidos e duradouros. Almejamos ser a referência no mercado, sendo conhecidos por nossa integridade, 
-                                            transparência e compromisso com a melhoria contínua.
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="nav-item-03" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/automatizacao.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Transparência: Agimos com total transparência em nossas operações e informações, promovendo a confiança mútua. 
-                                            Comprometimento Personalizado: Nos dedicamos a entender as necessidades individuais de cada cliente, oferecendo soluções financeiras.  
-                                            Respeito e Empatia: Valorizamos a diversidade e tratamos todos com respeito e empatia, construindo relações duradouras. Sustentabilidade Financeira: 
-                                            Comprometemo-nos a promover práticas financeiras sustentáveis, visando o bem-estar financeiro a longo prazo de nossos clientes.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-   <div class="container">
-
-        <div class="row">
-            <div class="col-11 col-md-12 text-center ml-md-0 ml-2 my-5">
-
-  </div>
-
-            <div id="servicos" class="row justify-content-sm-center">
-
-                <div id="app" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-01.jpg
-">
-                        <div class="card-body">
-                            <h4 class="card-title">Taxas de juros baixas:</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Oferecemos as melhores taxas do mercado para que você possa realizar</li>
-
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="web" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-02.jpg">
-                        <div class="card-body">
-                            <h4 class="card-title">Prazos longos para pagar:</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Você pode parcelar o seu crédito em até 84 vezes,</li>
-                            <li class="list-group-item">facilitando o pagamento das suas parcelas.</li>
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="aut" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-03.jpg">
-                        <div class="card-body">
-                            <h4 class="card-title">Atendimento personalizado e prioritário</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Uma equipe de especialistas está à disposição para, te orientar e ajudar a escolher a melhor opção de crédito para você.</li>
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+   
 
 <!-- Botão para Chamar o Modal de Requisição -->
 <div class="text-center">
@@ -775,7 +552,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                    
                     <div class="form-group">
-                        <label for="tipo" class="text-left">Tipo:</label>
+                        <label for="tipo">Tipo:</label>
                         <textarea class="form-control" id="tipo" name="tipo" rows="3" maxlength="250"></textarea>
                     </div>
                     <div class="form-group">
@@ -815,29 +592,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-
 <script>
-// Desabilitar outras opções de categoria quando "Outros" é selecionado
-document.addEventListener('DOMContentLoaded', function() {
-    var outrosCheckbox = document.getElementById('outros_check');
-    var outrasOpcoes = document.querySelectorAll('input[name="categoria"]:not(#outros_check)');
-
-    outrosCheckbox.addEventListener('change', function() {
-        if (outrosCheckbox.checked) {
-            outrasOpcoes.forEach(function(opcao) {
-                opcao.disabled = true;
-            });
-            document.getElementById('outros_info_div').style.display = 'block';
-        } else {
-            outrasOpcoes.forEach(function(opcao) {
-                opcao.disabled = false;
-            });
-            document.getElementById('outros_info_div').style.display = 'none';
-        }
-    });
-});
+                        $(document).ready(function() {
+                            $('#celular').mask($('#pais_ddd').val() + ' 00 00000-0000', {
+                                onKeyPress: function(val, e, field, options) {
+                                    // Validação para 9 dígitos do celular + DDD
+                                    var numeros = val.replace(/\D/g, '');
+                                    if (numeros.length === 11) {
+                                        var novoValor = val.replace(/^(\d{2})(\d{1})(\d{4})(\d{4}).*/, '$1 $2 $3-$4');
+                                        $(field).val(novoValor);
+                                    }
+                                }
+                            });
+                        });
 </script>
 
+<script>
+
+    // Função para exibir o campo "Outros" quando a opção é selecionada
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var outrosCheckbox = document.getElementById('outros_check');
+        var outrosInfoDiv = document.getElementById('outros_info_div');
+
+        outrosCheckbox.addEventListener('change', function() {
+            if (outrosCheckbox.checked) {
+                outrosInfoDiv.style.display = 'block';
+            } else {
+                outrosInfoDiv.style.display = 'none';
+            }
+        });
+    });
+</script>
 
    <style>
     /* Estilo para tornar o modal responsivo */
@@ -865,93 +651,63 @@ document.addEventListener('DOMContentLoaded', function() {
             
 
 <!-- Compo Footer do Site -->
-<div id="depoimentos" class="row">
-    <div class="col-sm-12 mb-3"><hr></div>
-    <div class="col-sm-4">
-        <h3 class="text-center">Contato</h3>
-        <p class="text-center mt-md-5 mt-3">
-            <i class="fa fa-phone text-success" aria-hidden="true"></i>
-            (11) 94801-6298
-        </p>                
-        <p class="text-center">
-            <i class="fa fa-envelope text-success" aria-hidden="true"></i>
-            projetointegrador@univesp.com.br
-        </p>
-    </div>
+        <div id="depoimentos" class="row">
+            <div class="col-sm-12 mb-3"><hr></div>
+            <div class="col-sm-4">
+                <h3 class="text-center">Contato</h3>
+                <p class="text-center mt-md-5 mt-3">
+                    <i class="fa fa-phone text-success" aria-hidden="true"></i>
+                    (11) 90000-0000
+                </p>
+                <p class="text-center mt-md-2 mt-3">
+                    <i class="fa fa-mobile-phone text-success" aria-hidden="true"></i>
+                    Whatsapp
+                </p>
+                <p class="text-center">
+                    <i class="fa fa-envelope text-success" aria-hidden="true"></i>
+                    projetointegrador@univesp.com.br
+                </p>
+            </div>
 
-    <div class="col-sm-4">
+            <div class="col-sm-4">
+                <h3 class="text-center">Menu</h3>
                 <div class="list-group text-center">
-            <a href="#inicio" class="list-group-item list-group-item-action list-group-item-success">
-                Início
-            </a>
-            <a href="#servicos" class="list-group-item list-group-item-action list-group-item-success">
-                Serviços
-            </a>
-            <a href="#Missão, Visão e Valores" class="list-group-item list-group-item-action list-group-item-success">
-                Missão, Visão e Valores
-            </a>
-            <a href="#contato" class="list-group-item list-group-item-action list-group-item-success">
-                Contato
-            </a>
+                    <a href="#inicio" class="list-group-item list-group-item-action list-group-item-success">
+                        Início
+                    </a>
+                    <a href="#servicos" class="list-group-item list-group-item-action list-group-item-success">
+                        Serviços
+                    </a>
+                    <a href="#Missão, Visão e Valores" class="list-group-item list-group-item-action list-group-item-success">
+                        Missão, Visão e Valores
+                    </a>
+                    <a href="#contato" class="list-group-item list-group-item-action list-group-item-success">
+                        Contato
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-4 mt-md-0 mt-4">
+                <h3 class="text-center">Social</h3>
+                <div class="btn-group-vertical btn-block btn-group-lg" role="group">
+                    <a class="btn btn-outline-primary" href="https://web.facebook.com/ProjetoPI/"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a class="btn btn-outline-info" href="https://twitter.com/ProjetoPI/"><i class="fab fa-twitter-square"></i> Twitter</a>
+                    <a class="btn btn-outline-warning" href="https://www.instagram.com/ProjetoPI/"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a class="btn btn-outline-info" href="https://api.whatsapp.com/send?phone=11900000000"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+                </div>
+            </div>
+
+
         </div>
     </div>
-
-    <div class="col-sm-4 mt-md-0 mt-4">
-        <h3 class="text-center">Social</h3>
-        <div class="btn-group-vertical btn-block btn-group-lg" role="group">            
-            <a class="btn btn-outline-warning" href=https://www.instagram.com/confintersp?igsh=a3NuaGJrem5pYzZu/"><i class="fab fa-instagram"></i> Instagram</a>
-            <a class="btn btn-outline-info" href="https://api.whatsapp.com/send?phone=11948016298"><i class="fab fa-whatsapp"></i> Whatsapp</a>
-        </div>
+    <div class="col-12 mt-5 bg-success pb-2">
+        <hr>
+        <blockquote class="blockquote text-center text-light">
+            <p class="mb-0"><em>"Empresa séria, comprometida com seus clientes, preço justo e entrega no prazo!"</p>
+            <footer class="blockquote-footer text-white">Anônimo, <cite tittle="titulo">Depoimento</cite></footer>
+        </blockquote>
     </div>
-</div>
-
-<!-- Div para Envio de Depoimentos -->
-<div class="col-12 mt-5 text-center">
-    <h2>Enviar Depoimento</h2>
-    <div class="d-inline-block mx-auto" style="width: 300px; border: 1px solid #ccc; padding: 20px; border-radius: 10px;">
-        <form action="php/enviar_depoimento.php" method="POST">
-            <div class="form-group">
-                <label for="nome">Seu Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Em branco enviará como Anônimo" name="nome" required>
-            </div>
-            <div class="form-group">
-                <label for="mensagem">Mensagem:</label>
-                <textarea class="form-control" id="mensagem" name="mensagem" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Enviar Depoimento</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<!-- Div para Depoimentos Aprovados -->
-<div class="col-12 mt-5 bg-success pb-2">
-    
-    <hr>
-    <?php
-    // Consultar os depoimentos aprovados no banco de dados
-    $sql = "SELECT nome, mensagem FROM depoimentos WHERE status_mod = 'aprovado'";
-    $result = mysqli_query($conexao, $sql);
-
-    // Verificar se há depoimentos aprovados
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $nome = $row['nome'] ? $row['nome'] : "Anônimo";
-            $mensagem = $row['mensagem'];
-    ?>
-            <blockquote class="blockquote text-center text-light">
-                <p class="mb-0"><em>"<?php echo $mensagem; ?>"</em></p>
-                <footer class="blockquote-footer text-white"><?php echo $nome; ?>
-            </blockquote>
-    <?php
-        }
-    } else {
-        echo "<p class='text-center text-white'>Nenhum depoimento aprovado disponível.</p>";
-    }
-    ?>
-</div>
+    </div>    
 
     <!-- jQuery,Popper.js, then Bootstrap JS ... all called from our source/-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -1030,7 +786,11 @@ class= "fa fa-envelope text-success col-12 col-md-1 esp" aria - hidden="true" ><
                     <div class="col-sm-4">
                         <h3 class="text-center">Contato</h3>
                         <p class="text-center mt-md-5 mt-3"><i class="fa fa-phone text-success" aria-hidden="true"></i>
-                            (11) 94801-6298                       
+                            (11) 90000-0000
+                        </p>
+                        <p class="text-center mt-md-2 mt-3"><i class="fa fa-mobile-phone text-success" aria-hidden="true"></i>
+                            Whatsapp
+                        </p>
                         <p class="text-center"><i class="fa fa-envelope text-success" aria-hidden="true"></i>
                             projetointegrador@univesp.com.br
                         </p>
@@ -1056,9 +816,11 @@ class= "fa fa-envelope text-success col-12 col-md-1 esp" aria - hidden="true" ><
 
                     <div class="col-sm-4 mt-md-0 mt-4">
                         <h3 class="text-center">Social</h3>
-                        <div class="btn-group-vertical btn-block btn-group-lg" role="group"> 
-                            <a class="btn btn-outline-warning" href="https://www.instagram.com/confintersp?igsh=a3NuaGJrem5pYzZu"><i class="fab fa-instagram"></i> Instagram</a>
-                            <a class="btn btn-outline-info" href="https://api.whatsapp.com/send?phone=11948016298"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+                        <div class="btn-group-vertical btn-block btn-group-lg" role="group">
+                            <a class="btn btn-outline-primary" href="https://web.facebook.com/ProjetoPI/"><i class="fab fa-facebook"></i> Facebook</a>
+                            <a class="btn btn-outline-info" href="https://twitter.com/ProjetoPI/"><i class="fab fa-twitter-square"></i> Twitter</a>
+                            <a class="btn btn-outline-warning" href="https://www.instagram.com/ProjetoPI/"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a class="btn btn-outline-info" href="https://api.whatsapp.com/send?phone=11900000000"><i class="fab fa-whatsapp"></i> Whatsapp</a>
                         </div>
                     </div>
 

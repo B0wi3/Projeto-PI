@@ -1,6 +1,6 @@
 <?php
 include 'conexao.php';
-
+include_once('verifica_login.php');
 echo "<h3>Requisições de Análise de Crédito</h3>";
 
 // Tabela para mostrar as requisições com opções de filtro

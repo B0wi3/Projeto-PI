@@ -1,7 +1,7 @@
 <?php
 // Conexão com o banco de dados
 include_once('conexao.php');
-
+include_once('verifica_login.php');
 // Consulta SQL para selecionar todas as requisições
 $query = "SELECT * FROM requisicoes";
 $result = mysqli_query($conn, $query);
