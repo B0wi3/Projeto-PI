@@ -1,14 +1,16 @@
 <?php
-define('HOST', 'localhost');
-define('USUARIO', 'root');
-define('SENHA', '');
-define('DB', 'confinter');
+// Dados de conexão com o banco de dados
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "confinter";
 
-// Estabelecer conexão com o banco de dados
-$conexao = mysqli_connect(HOST, USUARIO, SENHA, DB);
+// Conexão com o banco de dados
+$conexao = mysqli_connect($host, $user, $password, $database);
 
-// Verificar se a conexão foi bem-sucedida
-if (!$conexao) {
-    die('Erro ao conectar ao banco de dados: ' . mysqli_connect_error());
+// Verifica se houve erro na conexão
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
 }
 ?>

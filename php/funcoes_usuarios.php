@@ -34,4 +34,16 @@
         }
         return $usuarios;
     }
+    // Função para buscar um usuário pelo ID
+function buscarUsuarioPorId($conexao, $id) {
+    $sql = "SELECT * FROM usuarios WHERE id = $id";
+    $resultado = mysqli_query($conexao, $sql);
+    
+    // Verificar se houve algum resultado
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        return mysqli_fetch_assoc($resultado);
+    } else {
+        return null; // Retorna null se o usuário não for encontrado
+    }
+}
 ?>

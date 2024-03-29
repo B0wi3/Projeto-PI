@@ -81,20 +81,4 @@ function atualizarCliente($conexao, $id_cliente, $nome, $email, $telefone) {
         return false;
     }
 }
-// Função para excluir um cliente pelo ID
-function excluirCliente($conexao, $id_cliente) {
-    // Query SQL para excluir o cliente pelo ID
-    $query = "DELETE FROM clientes WHERE id_cliente = ?";
-    $stmt = mysqli_prepare($conexao, $query);
-    mysqli_stmt_bind_param($stmt, "i", $id_cliente);
-    $resultado = mysqli_stmt_execute($stmt);
-    
-    // Verificar se a exclusão foi bem-sucedida
-    if($resultado) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 ?>

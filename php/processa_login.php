@@ -4,7 +4,7 @@ session_start();
 if ($_POST['username'] === 'admin' && $_POST['password'] === 'senha') {
     // Login bem-sucedido, redirecione para o painel de administração
     $_SESSION['username'] = $_POST['username'];
-    header('Location: painel_admin.php');
+    header('Location: admin.php');
     exit();
 } else {
     // Credenciais inválidas, redirecione de volta para a página de login com uma mensagem de erro
