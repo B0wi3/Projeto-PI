@@ -239,8 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="inicio" class="container">
         <a class="navbar-brand h1 mb-0" href="#">
             <img src="imgs/logo.png" alt="Logo CONFINTER" class="mr-2"> <!-- Adicione o elemento de imagem aqui -->
-            CONFINTER
-        </a>
+                    </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -393,176 +392,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </a>
 
 </div>   
-<div class="container">
-
-        <div class="row">
-            <div class="col-11 col-md-12 text-center ml-md-0 ml-2 my-5">
-
-  </div>
-
-            <div id="servicos" class="row justify-content-sm-center">
-
-                <div id="app" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-01.jpg
-">
-                        <div class="card-body">
-                            <h4 class="card-title">Taxas de juros baixas:</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Oferecemos as melhores taxas do mercado para que você possa realizar</li>
-
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="web" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-02.jpg">
-                        <div class="card-body">
-                            <h4 class="card-title">Prazos longos para pagar:</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Você pode parcelar o seu crédito em até 84 vezes,</li>
-                            <li class="list-group-item">facilitando o pagamento das suas parcelas.</li>
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="aut" class="col-sm-6 col-md-4 disp">
-                    <div class="card mb-5">
-                        <img class="card-img top" src="imgs/item-03.jpg">
-                        <div class="card-body">
-                            <h4 class="card-title">Atendimento personalizado e prioritário</h4>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Uma equipe de especialistas está à disposição para, te orientar e ajudar a escolher a melhor opção de crédito para você.</li>
-                        </ul>
-                        <div class="card-footer text-muted">
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="jumbotron jumbotron-fluid">
-
-            <div id="Missão, Visão e Valores" class="container">
-
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h1 class="display-4">
-                            <i class="fa fa-video-camera text-success col-12 col-md-1 esp" aria-hidden="true"></i>
-                            Missão, Visão e Valores
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="nav nav-pills justify-content-center mb-4" id="pills-nav" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href="#nav-item-01">
-                                    Missão
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-pills-02" data-toggle="pill" href="#nav-item-02">
-                                    Visão
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-pills-03" data-toggle="pill" href="#nav-item-03">
-                                    Valores
-                                </a>
-                            </li>
-
-                        </ul>
-
-                        <div class="tab-content" id="nav-pills-content">
-                            <div class="tab-pane fade show active" id="nav-item-01" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/site.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Ser a empresa de consignados mais querida e admirada do Brasil,
-                                            oferecendo soluções financeiras inteligentes que realizam sonhos e
-                                            constroem relacionamentos de confiança com nossos clientes, colaboradores
-                                            e parceiros.
-                                            <br><br>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="nav-item-02" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/aplicativo.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Ser a líder absoluta em crédito consignado no Brasil, reconhecida pela excelência em atendimento,
-                                            inovação e responsabilidade social, impactando positivamente a vida de milhões de pessoas.
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="nav-item-03" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item"
-                                                    src="videos/automatizacao.mp4">
-                                            </iframe>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 mt-4 mt-md-0">
-                                        <p>
-                                            Confiança: Agimos com transparência, ética e responsabilidade em todas as nossas relações;
-                                            Respeito: Valorizamos a individualidade e a diversidade, promovendo um ambiente de trabalho inclusivo e acolhedor;
-                                            Excelência: Buscamos a superação contínua em tudo que fazemos, com foco na qualidade dos nossos produtos, serviços e atendimento;
-                                            Inovação: Somos uma empresa ágil e disruptiva, que busca constantemente novas soluções para atender às necessidades dos nossos clientes;
-                                            Sustentabilidade: Nos comprometemos com a gestão ambientalmente responsável e com o desenvolvimento social das comunidades onde atuamos;
-                                            Acreditamos que o crédito consignado pode ser uma ferramenta poderosa para realizar sonhos e construir um futuro melhor para todos.
-                                            Por isso, estamos comprometidos em oferecer soluções financeiras acessíveis, justas e transparentes. Junte-se a nós e faça parte da nossa história;
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
 
         <div class="jumbotron jumbotron-fluid">
 
@@ -612,6 +441,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <p>
                                             Facilitar o acesso a crédito consignado e fornecer consultoria financeira personalizada, 
                                             visando o equilíbrio e bem-estar financeiro dos nossos clientes.
+                                            <br><br>
                                         </p>
                                     </div>
                                 </div>
@@ -669,6 +499,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
         </div>
+
+
+        
 
    <div class="container">
 
