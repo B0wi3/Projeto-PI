@@ -311,42 +311,7 @@
     <div id="carouselSite" class="carousel slide" data-ride="carousel">
 
     <ol class="carousel-indicators">
-        <?php
-        // Consulta ao banco de dados para obter as imagens do carrossel
-        $sql = "SELECT * FROM imagens_carrossel";
-        $result = $conexao->query($sql);
-
-        $indicator_index = 0; // Índice para os indicadores do carrossel
-
-        // Loop para criar os indicadores para cada imagem
-        while ($row = $result->fetch_assoc()) {
-            $active_class = $indicator_index === 0 ? 'active' : ''; // Adiciona a classe 'active' apenas para o primeiro indicador
-            echo "<li data-target='#carouselSite' data-slide-to='$indicator_index' class='$active_class'></li>";
-            $indicator_index++;
-        }
-        ?>
-    </ol>
-
-
-    <div class="carousel-inner">
-        <?php
-        // Reinicializa o índice do resultado
-        $result->data_seek(0);
-        $item_index = 0; // Índice para os itens do carrossel
-
-        // Loop para criar cada item do carrossel com suas respectivas imagens e conteúdos
-        while ($row = $result->fetch_assoc()) {
-            $active_class = $item_index === 0 ? 'active' : ''; // Adiciona a classe 'active' apenas para o primeiro item
-            $nome_arquivo = $row['nome_arquivo'];
-            echo "<div class='carousel-item $active_class'>
-                    <img src='imgs/$nome_arquivo' class='img-fluid d-block'>
-                    <div class='carousel-caption d-none d-md-block'>
-                        <!-- Adicione aqui os conteúdos para cada slide, se necessário -->
-                    </div>
-                  </div>";
-            $item_index++;
-        }
-        ?>
+        
     </div>
 
     <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
@@ -732,17 +697,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="col-12 mt-5 bg-success pb-2">
     
     <hr>
-    <?php
-    // Consultar os depoimentos aprovados no banco de dados
-    $sql = "SELECT nome, mensagem FROM depoimentos WHERE status_mod = 'aprovado'";
-    $result = mysqli_query($conexao, $sql);
-
-    // Verificar se há depoimentos aprovados
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $nome = $row['nome'] ? $row['nome'] : "Anônimo";
-            $mensagem = $row['mensagem'];
-    ?>
+   
             <blockquote class="blockquote text-center text-light">
                 <p class="mb-0"><em>"<?php echo $mensagem; ?>"</em></p>
                 <footer class="blockquote-footer text-white"><?php echo $nome; ?>
